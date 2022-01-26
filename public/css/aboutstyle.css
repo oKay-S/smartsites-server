@@ -93,15 +93,20 @@ section {
 	border-color: transparent
 }
 .navbar-default .navbar-brand {
-	color: #fff;
+	color: #222;
 	font-family: "Montserrat",sans-serif;
     padding: 0px;
 }
 .navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:active,.navbar-default .navbar-brand.active {
 	color: #fec503
 }
+
+#active {
+    color: #fec503;
+}
+
 .navbar-default .navbar-collapse {
-	border-color: rgba(255,255,255,.02)
+	border-color: black
 }
 .navbar-default .navbar-toggle {
 	background-color: #fed136;
@@ -118,13 +123,8 @@ section {
 	text-transform: uppercase;
 	font-weight: 400;
 	letter-spacing: 1px;
-	color:#fff
+	color:black
 }
-
-#active {
-    color: #fec503;
-}
-
 .navbar-default .nav li a:hover,.navbar-default .nav li a:focus {
 	color: #fed136;
 	outline: 0
@@ -186,7 +186,7 @@ header {
 }
 
 header .intro-text {
-    padding-top: 350px;
+    padding-top: 50vh;
     padding-bottom: 1000px;
 }
 
@@ -768,4 +768,8 @@ and (max-width : 480px) {
     margin-top: 7px;
     font-size: 20px;
 }
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }
