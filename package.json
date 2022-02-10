@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "express-ws": "^5.0.2",
+    "websocket": "^1.0.34"
   }
 }

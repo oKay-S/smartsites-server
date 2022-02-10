@@ -1,7 +1,11 @@
 var express = require('express');
 const path = require('path');
 var app = express();
+var expressWs = require('express-ws')(app);
 const PORT = process.env.PORT || 8080;
+var aWss = expressWs.getWss('/');
+
+let string = "connected";
 
 app.use(express.static(__dirname + '/public'));
 
@@ -28,7 +32,31 @@ app.get('/review', function(req, res) {
     res.sendFile(path.join(__dirname, 'public' , 'review.html'));
 });
 
+app.use(function (req, res, next) {
+    console.log('middleware');
+    req.testing = 'testing';
+    return next();
+});
 
+app.ws('/', function(ws, req) {
+    ws.on('message', function(msg) {
+        if (msg.split(".")[0] == "bkjsafey834tw"){
+            let string = msg.split(".")[1] || "0";
+            try {
+                if (string === parseInt(string).toString()) {
+                    aWss.clients.forEach(function (client) {
+                        client.send(string);
+                    });
+                }
+            }
+            catch (e)
+            {
+                console.log("inproper message")
+            }
+        }
+    });
+    console.log('socket', req.testing);
+});
 
 // start the server
 app.listen(PORT);
