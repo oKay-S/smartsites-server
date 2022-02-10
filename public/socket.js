@@ -1,5 +1,5 @@
 // Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket('wss://smartsites.kieransoutter.com/');
 
 // Connection opened
 socket.addEventListener('open', function (event) {
