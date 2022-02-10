@@ -38,10 +38,15 @@ app.use(function (req, res, next) {
     return next();
 });
 
+let lastCount = "0";
+
 app.ws('/', function(ws, req) {
+    ws.send(lastCount);
+
     ws.on('message', function(msg) {
         if (msg.split(".")[0] == "bkjsafey834tw"){
             let string = msg.split(".")[1] || "0";
+            lastCount = string;
             try {
                 if (string === parseInt(string).toString()) {
                     aWss.clients.forEach(function (client) {
