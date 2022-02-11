@@ -38,25 +38,43 @@ app.use(function (req, res, next) {
     return next();
 });
 
-let lastCount = "0";
+let lastcount = ["0"];
+
+
+function gettime(){
+    let date = new Date();
+    return date.getUTCHours() + ":" + date.getUTCMinutes();
+}
+
+let lasttime = [gettime()];
+
 
 app.ws('/', function(ws, req) {
-    ws.send(lastCount);
+    lastcount.forEach(function (count){
+        ws.send(JSON.stringify({times:lasttime, counts:lastcount}));
+    });
 
     ws.on('message', function(msg) {
         if (msg.split(".")[0] == "bkjsafey834tw"){
             let string = msg.split(".")[1] || "0";
-            lastCount = string;
             try {
                 if (string === parseInt(string).toString()) {
+                    console.log("test")
+                    lastcount.push(string);
+                    lasttime.push(gettime())
+                    if (lastcount.length > 10){
+                        lastcount.shift()
+                        lasttime.shift()
+                    }
+                    console.log({times:lasttime, counts:lastcount})
                     aWss.clients.forEach(function (client) {
-                        client.send(string);
+                        client.send(JSON.stringify({times:lasttime, counts:lastcount}));
                     });
                 }
             }
             catch (e)
             {
-                console.log("inproper message")
+                console.log("inproper message: ",e)
             }
         }
     });

@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^3.7.0",
     "express": "^4.17.2",
     "express-ws": "^5.0.2",
     "websocket": "^1.0.34"
